@@ -40,7 +40,7 @@
           />
         </div>
         <div
-         v-if="fullData.length > 2"
+          v-if="fullData.length > 2"
           class="optionsRow"
         >
           <ft-toggle-switch
