@@ -13,6 +13,7 @@ import FtToggleSwitch from '../../components/ft-toggle-switch/ft-toggle-switch.v
 import FtAutoLoadNextPageWrapper from '../../components/ft-auto-load-next-page-wrapper/ft-auto-load-next-page-wrapper.vue'
 import { ctrlFHandler, debounce, getIconForSortPreference } from '../../helpers/utils'
 import { isNavigationFailure, NavigationFailureType } from 'vue-router'
+import settingsManager from '@/utils/settingsManager'
 
 const SORT_BY_VALUES = {
   NameAscending: 'name_ascending',
@@ -181,7 +182,7 @@ export default defineComponent({
       this.filterPlaylist()
     },
     sortBy() {
-      sessionStorage.setItem('UserPlaylists/sortBy', this.sortBy)
+      settingsManager.set('HistoryPage/sortBy', this.sortBy)
     },
   },
   created: function () {
@@ -191,7 +192,8 @@ export default defineComponent({
       this.dataLimit = limit
     }
 
-    const sortBy = sessionStorage.getItem('UserPlaylists/sortBy')
+    const sortBy = settingsManager.get('HistoryPage/sortBy')
+
     if (sortBy != null) {
       this.sortBy = sortBy
     }
