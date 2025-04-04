@@ -221,9 +221,12 @@ export default defineComponent({
       // Only care when CreatePlaylistPrompt hidden
       // Shift focus from button to prevent unwanted click event
       // due to enter key press in CreatePlaylistPrompt
-      nextTick(() => this.$refs.searchBar.focus())
+      nextTick(() => {
+        if (this.$refs.searchBar) {
+          this.$refs.searchBar.focus()
+        }
+      })
     },
-
     addingDuplicateVideosEnabled(val) {
       if (val) { return }
 
@@ -238,7 +241,11 @@ export default defineComponent({
     this.updateQueryDebounce = debounce(this.updateQuery, 500)
     document.addEventListener('keydown', this.keyboardShortcutHandler)
     // User might want to search first if they have many playlists
-    nextTick(() => this.$refs.searchBar.focus())
+    nextTick(() => {
+      if (this.$refs.searchBar) {
+        this.$refs.searchBar.focus()
+      }
+    })
   },
   beforeDestroy() {
     document.removeEventListener('keydown', this.keyboardShortcutHandler)
